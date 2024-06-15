@@ -18,4 +18,4 @@ app.use('/shopping', proxy('http://localhost:3003'))
 // If no endpoint specified -> root is for products!
 app.use('/', proxy('http://localhost:3002'))
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, () => console.log(`App listening on port ${port}!`))
