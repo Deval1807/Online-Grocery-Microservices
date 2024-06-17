@@ -58,11 +58,3 @@ module.exports.PublishCustomerEvent = async(payload) => {
     payload
   })
 }
-
-module.exports.PublishShoppingEvent = async(payload) => {
-  // perform some operations!
-  axios.post('http://localhost:3000/shopping/app-events', {
-    payload
-  })
-}
-

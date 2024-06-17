@@ -84,7 +84,8 @@ class ProductService {
                 event: event,
                 data: { userId, product, qty }
             }
-            return FormateData(payload);
+
+            return payload;
         }else {
             return FormateData({ error: "No Product Available" })
         }

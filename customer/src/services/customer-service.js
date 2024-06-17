@@ -139,7 +139,7 @@ class CustomerService {
     }
 
     async SubscribeEvents(payload){
- 
+  
         const { event, data } =  payload;
 
         const { userId, product, order, qty } = data;
@@ -149,7 +149,7 @@ class CustomerService {
             case 'REMOVE_FROM_WISHLIST':
                 this.AddToWishlist(userId,product)
                 break;
-            case 'ADD_TO_CART':
+            case 'ADD_TO_CART': 
                 this.ManageCart(userId,product, qty, false);
                 break;
             case 'REMOVE_FROM_CART':

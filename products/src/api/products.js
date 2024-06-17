@@ -68,7 +68,7 @@ module.exports = (app) => {
         
         try {
             // get the payload which will be sent to customer microservice
-            const { payload } = await service.GetProductPayload(_id, { productId: req.body._id }, 'ADD_TO_WISHLIST')
+            const payload = await service.GetProductPayload(_id, { productId: req.body._id }, 'ADD_TO_WISHLIST')
 
             await PublishCustomerEvent(payload)
 
@@ -84,7 +84,7 @@ module.exports = (app) => {
         const productId = req.params.id;
 
         try {
-            const { payload } = await service.GetProductPayload(_id, { productId }, 'REMOVE_FROM_WISHLIST')
+            const payload = await service.GetProductPayload(_id, { productId }, 'REMOVE_FROM_WISHLIST')
 
             await PublishCustomerEvent(payload)
 
@@ -100,7 +100,7 @@ module.exports = (app) => {
         const { _id } = req.user;
         
         try {     
-            const { payload } = await service.GetProductPayload(_id, { productId: req.body._id, qty: req.body.qty }, 'ADD_TO_CART')
+            const payload = await service.GetProductPayload(_id, { productId: req.body._id, qty: req.body.qty }, 'ADD_TO_CART')
 
             PublishCustomerEvent(payload);
             PublishShoppingEvent(payload);
@@ -123,7 +123,7 @@ module.exports = (app) => {
         const productId = req.params.id
 
         try {
-            const { payload } = await service.GetProductPayload(_id, { productId }, 'REMOVE_FROM_CART')
+            const payload = await service.GetProductPayload(_id, { productId }, 'REMOVE_FROM_CART')
 
             PublishCustomerEvent(payload);
             PublishShoppingEvent(payload);
