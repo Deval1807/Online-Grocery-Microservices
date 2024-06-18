@@ -1,8 +1,11 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const axios = require("axios")
+const amqplib = require("amqplib");
 
-const { APP_SECRET } = require("../config");
+const { APP_SECRET,
+  MESSAGE_BROKER_URL,
+  EXCHANGE_NAME,
+} = require("../config");
 
 //Utility functions
 module.exports.GenerateSalt = async () => {
@@ -52,17 +55,54 @@ module.exports.FormateData = (data) => {
 };
 
 
-module.exports.PublishCustomerEvent = async(payload) => {
-  // perform some operations!
-  axios.post('http://localhost:3000/customer/app-events', {
-    payload
-  })
+/*************** Message Broker ***************/
+
+// Crate a channel
+module.exports.CreateChannel = async() => {
+  try {
+    const connection = await amqplib.connect(MESSAGE_BROKER_URL);
+
+    // create a channel once the connection is establised
+    const channel = await connection.createChannel();
+
+    // assertExchange will distribute our messages in queues dependig on the certain configurations
+    await channel.assertExchange(EXCHANGE_NAME, 'direct', false);
+
+    return channel;
+
+  } catch (error) {
+    throw error
+  }
 }
 
-module.exports.PublishShoppingEvent = async(payload) => {
-  // perform some operations!
-  axios.post('http://localhost:3000/shopping/app-events', {
-    payload
-  })
+// Publish Messages
+module.exports.PublishMessage = async(channel, binding_key, message) => {
+  try {
+    // publish the specific message to the channel
+    // with the help of EXCHANGE_NAME and the binding key
+    // only the consumer with that specific binding key can consume the message
+    await channel.publish(EXCHANGE_NAME, binding_key, Buffer.from(message));
+    console.log("Message has been published: ", message)
+  } catch (error) {
+    throw error
+  }
 }
 
+// Subscribe Messages
+module.exports.SubscribeMessage = async(channel,service, binding_key) => {
+  try {
+    const appQueue = await channel.assertQueue(QUEUE_NAME);
+
+    // bind the queue name with the exchange name along with the binding key
+    channel.bindQueue(appQueue.queue, EXCHANGE_NAME, binding_key);
+
+    channel.consume(appQueue.queue, data => {
+      console.log("recieved data in products service: ");
+      console.log(data.content.toString());
+      channel.ack(data);
+    })
+
+  } catch (error) {
+    throw error
+  }
+}

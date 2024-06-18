@@ -1,8 +1,9 @@
 const ProductService = require('../services/product-service');
-const { PublishCustomerEvent, PublishShoppingEvent } = require('../utils')
+const { PublishMessage } = require('../utils')
 const UserAuth = require('./middlewares/auth')
+const { SHOPPING_BINDING_KEY, CUSTOMER_BINDING_KEY } = require('../config')
 
-module.exports = (app) => {
+module.exports = (app, channel) => {
     
     const service = new ProductService();
 
@@ -70,7 +71,8 @@ module.exports = (app) => {
             // get the payload which will be sent to customer microservice
             const payload = await service.GetProductPayload(_id, { productId: req.body._id }, 'ADD_TO_WISHLIST')
 
-            await PublishCustomerEvent(payload)
+            // await PublishCustomerEvent(payload)
+            PublishMessage(channel, CUSTOMER_BINDING_KEY, JSON.stringify(payload))
 
             return res.status(200).json(payload.data.product);
         } catch (err) {
@@ -86,7 +88,8 @@ module.exports = (app) => {
         try {
             const payload = await service.GetProductPayload(_id, { productId }, 'REMOVE_FROM_WISHLIST')
 
-            await PublishCustomerEvent(payload)
+            // await PublishCustomerEvent(payload)
+            PublishMessage(channel, CUSTOMER_BINDING_KEY, JSON.stringify(payload))
 
             return res.status(200).json(payload.data.product);
         } catch (err) {
@@ -102,8 +105,11 @@ module.exports = (app) => {
         try {     
             const payload = await service.GetProductPayload(_id, { productId: req.body._id, qty: req.body.qty }, 'ADD_TO_CART')
 
-            PublishCustomerEvent(payload);
-            PublishShoppingEvent(payload);
+            // PublishCustomerEvent(payload);
+            PublishMessage(channel, CUSTOMER_BINDING_KEY, JSON.stringify(payload))
+
+            // PublishShoppingEvent(payload);
+            PublishMessage(channel, SHOPPING_BINDING_KEY, JSON.stringify(payload))
     
             const response = {
                 product: payload.data.product,
@@ -125,8 +131,11 @@ module.exports = (app) => {
         try {
             const payload = await service.GetProductPayload(_id, { productId }, 'REMOVE_FROM_CART')
 
-            PublishCustomerEvent(payload);
-            PublishShoppingEvent(payload);
+            // PublishCustomerEvent(payload);
+            PublishMessage(channel, CUSTOMER_BINDING_KEY, JSON.stringify(payload))
+
+            // PublishShoppingEvent(payload);
+            PublishMessage(channel, SHOPPING_BINDING_KEY, JSON.stringify(payload))
 
             const response = {
                 product: payload.data.product,

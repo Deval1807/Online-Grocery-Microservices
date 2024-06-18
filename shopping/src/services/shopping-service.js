@@ -60,6 +60,8 @@ class ShoppingService {
   }
 
   async SubscribeEvents(payload){
+
+    payload = JSON.parse(payload);  // since we are passing it as a string
  
     const { event, data } =  payload;
 
