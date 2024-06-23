@@ -4,6 +4,12 @@ This is a backend project for an online grocery shopping application designed us
 
 The Entire Application is containerized by levaraging Docker and Deployed on AWS.
 
+---
+
+Also checkout the Simpler Monolithic Version of the same Project
+
+[Monolithic Architecture](https://github.com/Deval1807/Online-Grocery-Monolithic)
+
 ## Table of Contents
 
 1. [Features](#features)
@@ -67,6 +73,10 @@ The Entire Application is containerized by levaraging Docker and Deployed on AWS
 
 ## Api Documentation
 
+For Detailed API Documentation, visit:
+
+- [API Documentation](https://documenter.getpostman.com/view/33324941/2sA3XWdJot)
+
 
 ## Configuration
 
@@ -75,6 +85,8 @@ The Entire Application is containerized by levaraging Docker and Deployed on AWS
 
 
 ## Deployment
+
+- The [Deployed URL](http://online-gocery.ap-south-1.elasticbeanstalk.com)
 
 
 ## Contribution
