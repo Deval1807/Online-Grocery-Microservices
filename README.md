@@ -89,25 +89,38 @@ cd Online-Grocery-Microservices
 
 ### Configuration
 
-- Create a new file `.env` in all the 3 services' folders, i.e. customer, products and shopping
-- Make sure to have the following configuration in them
+1. .env configuration
 
-    ```env
-    APP_SECRET=<your_secret_key>
-    MONGODB_URI=<your_mongodb_url>
-    MESSAGE_BROKER_URL=<your_rabbitmq_url>
-    EXCHANGE_NAME=<your_exchange_name>
-    SHOPPING_BINDING_KEY=<binding_key_for_shopping_service>
-    CUSTOMER_BINDING_KEY=<binding_key_for_customer_service>
-    QUEUE_NAME=<queue_name_for_that_Service>
-    PORT=<prot_no_according_to_the_service>
-    ```
+    - Create a new file `.env` in all the 3 services' folders, i.e. customer, products and shopping
+    - Make sure to have the following configuration in them
 
-- please note that if you are using it locally, the configuration will be:
-    ```env
-    MESSAGE_BROKER_URL = 'amqp://localhost'
-    ```
+        ```env
+        APP_SECRET=<your_secret_key>
+        MONGODB_URI=<your_mongodb_url>
+        MESSAGE_BROKER_URL=<your_rabbitmq_url>
+        EXCHANGE_NAME=<your_exchange_name>
+        SHOPPING_BINDING_KEY=<binding_key_for_shopping_service>
+        CUSTOMER_BINDING_KEY=<binding_key_for_customer_service>
+        QUEUE_NAME=<queue_name_for_that_Service>
+        PORT=<prot_no_according_to_the_service>
+        ```
 
+    - please note that if you are using RabbitMQ locally, the configuration will be:
+        ```env
+        MESSAGE_BROKER_URL = 'amqp://localhost'
+        ```
+
+2. RabbitMQ configuration (If you are using it locally)
+    - Make sure to start your RabbitMQ service before starting the server, if you are using RabbitMQ locally.
+        - If you have already installed RabbitMQ, directly search for `RabbitMQ Service - Start` and you will be able to start it.
+    - RabbitMQ Management Console
+        - Once the service is start, go to `http://localhost:15672` for the accessing the management console
+        - If you are unable to access it, you will need to add a plugin for it
+        - Open RabbitMQ command prompt and run the following command
+            ```bash
+            rabbitmq-plugins enable rabbitmq_management
+            ```
+        - Restart your service and it should be working 😄
 
 ### Starting the Project
 
@@ -118,6 +131,7 @@ cd Online-Grocery-Microservices
     - Make sure you have your Docker service running
     - Make sure you have set up the `.env` files (see [Configuration](#configuration))
     - It is Advisable to use a Cloud Provider for RabbitMQ, while using it through Docker Image.
+        - Check the [cloud provider](https://www.cloudamqp.com/)
     - Build the image
         ```
         docker-compose build
@@ -136,15 +150,7 @@ cd Online-Grocery-Microservices
         ```
     - Make sure you have set up the `.env` files (see [Configuration](#configuration))
     - Make sure to start your RabbitMQ service before starting the server, if you are using RabbitMQ locally.
-        - If you have already installed RabbitMQ, directly search for `RabbitMQ Service - Start` and you will be able to start it.
-    - RabbitMQ Management Console
-        - Once the service is start, go to `http://localhost:15672` for the accessing the management console
-        - If you are unable to access it, you will need to add a plugin for it
-        - Open RabbitMQ command prompt and run the following command
-            ```bash
-            rabbitmq-plugins enable rabbitmq_management
-            ```
-        - Restart your service and it should be working 😄
+        - Check RabbitMQ configuration inside [Configuration](#configuration)
     - Starting the Services
         - Customer
             ```bash
