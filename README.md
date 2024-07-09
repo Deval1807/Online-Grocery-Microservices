@@ -16,7 +16,7 @@ Also checkout the Simpler Monolithic Version of the same Project
 2. [Technologies Used](#technologies-used)
 3. [Getiing Started](#getting-started)
     - [Prerequisites](#prerequisites)
-    - [Installation](#cloning)
+    - [Cloning](#cloning)
     - [Configuration](#configuration)
     - [Starting the Project](#starting-the-project)
     - [Usage](#usage)
