@@ -1,6 +1,6 @@
 # Backend for Online Grocery Applicaion (Microservice Architecture)
 
-This is a backend project for an online grocery shopping application designed using microservice architecture. The application consists of three main microservices: Customer, Products, and Shopping, with secure authentication, and seamless inter-service communication through RabbitMQ. 
+This is a backend project for an online grocery shopping application designed using microservice architecture. The application consists of three main microservices: Customer, Products, and Shopping, with secure authentication, and seamless inter-service communication through RabbitMQ as a message broker for better consistancy in Data. The Project also uses Nginx for efficient Reverse Proxy.
 
 The Entire Application is containerized by levaraging Docker and Deployed on AWS.
 
@@ -29,14 +29,18 @@ Also checkout the Simpler Monolithic Version of the same Project
 
 ## Features
 
-### General Features of Application
+### Key Features:
 
 - Microservices for Customer, Products, and Shopping
-- Secure authentication mechanisms
-- Seamless communication between services using RabbitMQ
-- Nginx for efficient reverse proxy
-- Docker for containerization
-- Deployment on AWS
+- Secure Authentication: Ensures safe and secure access for users with JWT-based authentication.
+- Seamless Inter-Service Communication: Utilizes RabbitMQ as a message broker, ensuring reliable and consistent data flow across microservices.
+- Efficient Reverse Proxy: Nginx is implemented for load balancing and efficient reverse proxy management, enhancing the application's performance and reliability.
+
+
+###  Containerization and Deployment:
+- Dockerized Microservices: Each microservice is containerized using Docker, ensuring consistent and isolated environments for development, testing, and production.
+- AWS Deployment: The entire application is deployed on AWS, leveraging its scalability and reliability to handle varying loads and ensure high availability.
+
 
 ### Features of Individual services:
 
