@@ -14,16 +14,17 @@ Also checkout the Simpler Monolithic Version of the same Project
 
 1. [Features](#features)
 2. [Technologies Used](#technologies-used)
-3. [Getiing Started](#getting-started)
+3. [Architecture Diagram](#architecture-diagram)
+4. [Getiing Started](#getting-started)
     - [Prerequisites](#prerequisites)
     - [Cloning](#cloning)
     - [Configuration](#configuration)
     - [Starting the Project](#starting-the-project)
     - [Usage](#usage)
-4. [API Documentation](#api-documentation)
-5. [Deployment](#deployment)
-6. [Contribution](#contribution)
-7. [Contact](#contact)
+5. [API Documentation](#api-documentation)
+6. [Deployment](#deployment)
+7. [Contribution](#contribution)
+8. [Contact](#contact)
 
 
 ## Features
@@ -63,6 +64,12 @@ Also checkout the Simpler Monolithic Version of the same Project
 - **Containerization:** Docker
 - **Cloud Deployment:** AWS (Beanstalk)
 - **Database:** MongoDB
+
+
+## Architecture Diagram
+
+![Architecture](https://raw.githubusercontent.com/Deval1807/Online-Grocery-Microservices/main/images/Microservice%20Architecture.jpg)
+
 
 
 ## Getting Started
